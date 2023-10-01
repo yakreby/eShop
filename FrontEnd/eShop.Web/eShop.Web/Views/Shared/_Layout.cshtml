@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/eShop.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.css" />
+
 </head>
 <body>
     <header>
@@ -23,13 +25,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Coupon" asp-action="CouponIndex">Coupon Index</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <partial name="_Notification" />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

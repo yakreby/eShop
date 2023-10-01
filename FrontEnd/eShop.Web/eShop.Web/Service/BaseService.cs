@@ -25,7 +25,7 @@ namespace eShop.Web.Service
             requestMessage.RequestUri = new Uri(requestDto.Url);
             if (requestDto.Url != null)
             {
-                requestMessage.Content = new StringContent(JsonConvert.SerializeObject(requestDto),
+                requestMessage.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data),
                     Encoding.UTF8, "application/json");
             }
             HttpResponseMessage apiResponse = null;

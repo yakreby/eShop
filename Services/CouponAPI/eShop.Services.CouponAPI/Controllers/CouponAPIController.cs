@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.Services.CouponAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/coupon")]
     [ApiController]
     public class CouponAPIController : ControllerBase
     {
@@ -90,7 +90,7 @@ namespace eShop.Services.CouponAPI.Controllers
         }
 
         [HttpPost]
-        public ResponseDto Post([FromBody] CouponDto couponDto)
+        public ResponseDto Post([FromBody] CouponDto? couponDto)
         {
             try
             {
@@ -138,6 +138,7 @@ namespace eShop.Services.CouponAPI.Controllers
         }
 
         [HttpDelete]
+        [Route("{id:int}")]
         public ResponseDto Delete(int id)
         {
             try
