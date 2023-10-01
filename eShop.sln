@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{A2119E15-FAFD-4DA9-AB62-89C2B467E22C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{B8246274-6D51-44EF-97BC-467F32542810}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{49425CAA-535D-45DD-A2FC-97A7BC1A4771}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{D004A0EE-32CD-426D-AD83-5F49CABDDDC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Services.CouponAPI", "Services\CouponAPI\eShop.Services.CouponAPI\eShop.Services.CouponAPI.csproj", "{A2A76070-4C7B-4768-A337-3E6A9C75A40A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Web", "FrontEnd\eShop.Web\eShop.Web\eShop.Web.csproj", "{752FCA52-E5F9-4678-ABAD-CA678C7182D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{37AE5963-49E1-4AB0-8E25-65F5FEBB9174}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2A76070-4C7B-4768-A337-3E6A9C75A40A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A76070-4C7B-4768-A337-3E6A9C75A40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A76070-4C7B-4768-A337-3E6A9C75A40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A76070-4C7B-4768-A337-3E6A9C75A40A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{752FCA52-E5F9-4678-ABAD-CA678C7182D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752FCA52-E5F9-4678-ABAD-CA678C7182D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752FCA52-E5F9-4678-ABAD-CA678C7182D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752FCA52-E5F9-4678-ABAD-CA678C7182D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2A76070-4C7B-4768-A337-3E6A9C75A40A} = {A2119E15-FAFD-4DA9-AB62-89C2B467E22C}
+		{752FCA52-E5F9-4678-ABAD-CA678C7182D4} = {B8246274-6D51-44EF-97BC-467F32542810}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E9B5D16-E6A6-4C68-9093-F1AE4C3162E8}
+	EndGlobalSection
+EndGlobal
