@@ -41,6 +41,7 @@ namespace eShop.Web.Controllers
                 ResponseDto? response = await _couponService.CreateCouponAsync(couponDto);
                 if (response != null && response.IsSuccess)
                 {
+                    TempData["Success"] = "Coupon Created";
                     return RedirectToAction(nameof(CouponIndex));
                 }
                 else
