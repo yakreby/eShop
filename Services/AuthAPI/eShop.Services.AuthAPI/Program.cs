@@ -2,6 +2,7 @@ using eShop.Services.AuthAPI.Data;
 using eShop.Services.AuthAPI.Models;
 using eShop.Services.AuthAPI.Service;
 using eShop.Services.AuthAPI.Service.IService;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,7 +44,6 @@ builder.Services.Configure<IdentityOptions>(options =>
       options.SignIn.RequireConfirmedEmail = false;
   }
 );
-
 
 var app = builder.Build();
 

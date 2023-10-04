@@ -10,13 +10,18 @@
     <div class="form-group">
         <label for="EmailAddress">Email Address</label>
         <input asp-for="EmailAddress" class="form-control" type="text" placeholder="Email Address" />
+        <span asp-validation-for="EmailAddress"></span>
     </div>
     <div class="form-group">
         <label for="Password">Password</label>
         <input asp-for="Password" class="form-control" type="text" placeholder="Password" />
+        <span asp-validation-for="Password"></span>
     </div><br />
     <div class="form-group">
         <input class="btn btn-sm btn-outline-dark" asp-for="EmailAddress" class="form-control" type="submit" value="Submit" />
     </div>
 </form>
 
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

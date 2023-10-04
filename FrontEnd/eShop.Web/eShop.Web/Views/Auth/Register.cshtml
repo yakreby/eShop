@@ -29,10 +29,12 @@
     <div class="form-group">
         <label for="Password">Password</label>
         <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
-    </div><br/>
+    </div><br />
     <div class="form-group">
         <input class="btn btn-sm btn-outline-dark" asp-for="EmailAddress" class="form-control" type="submit" value="Register" />
     </div>
 </form>
 
-
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

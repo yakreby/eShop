@@ -29,7 +29,7 @@ namespace eShop.Web.Service
                 ApiType = StaticDetails.ApiType.POST,
                 Data = loginRequestDto,
                 Url = StaticDetails.AuthAPIBase + "/api/authAPI/login"
-            });
+            }, withBearer: false);
         }
 
         public async Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto)
@@ -39,7 +39,7 @@ namespace eShop.Web.Service
                 ApiType = StaticDetails.ApiType.POST,
                 Data = registrationRequestDto,
                 Url = StaticDetails.AuthAPIBase + "/api/authAPI/register"
-            });
+            }, withBearer: false);
         }
     }
 }

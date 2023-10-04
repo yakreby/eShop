@@ -1,6 +1,8 @@
-﻿namespace eShop.Web.Service.IService
+﻿using eShop.Web.Service.Base;
+
+namespace eShop.Web.Service.IService
 {
-    public interface ITokenProvider
+    public interface ITokenProvider : IScopedService
     {
         void SetToken(string token);
         string? GetToken();
