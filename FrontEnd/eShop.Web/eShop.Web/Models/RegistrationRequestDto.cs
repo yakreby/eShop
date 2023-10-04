@@ -1,4 +1,4 @@
-﻿namespace eShop.Services.AuthAPI.Models.Dto
+﻿namespace eShop.Web.Models
 {
     public class RegistrationRequestDto
     {

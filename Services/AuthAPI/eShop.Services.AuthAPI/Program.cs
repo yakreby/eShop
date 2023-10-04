@@ -1,5 +1,7 @@
 using eShop.Services.AuthAPI.Data;
 using eShop.Services.AuthAPI.Models;
+using eShop.Services.AuthAPI.Service;
+using eShop.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,23 +12,40 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-//Jwt
+//Jwt Configuration
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 
 //Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+//Identity Configuration
+builder.Services.Configure<IdentityOptions>(options =>
+  {
+      options.Password.RequireDigit = false;
+      options.Password.RequireUppercase = false;
+      options.Password.RequiredLength = 3;
+      options.Password.RequireNonAlphanumeric = false;
+      options.Password.RequireLowercase = false;
+      options.Lockout.MaxFailedAccessAttempts = 5;
+      options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);
+      options.Lockout.AllowedForNewUsers = true;
+      options.User.RequireUniqueEmail = true;
+      options.SignIn.RequireConfirmedEmail = false;
+  }
+);
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
 
 //HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,10 +55,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 ApplyMigration();

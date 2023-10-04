@@ -1,4 +1,5 @@
 using eShop.Web.Service;
+using eShop.Web.Service.IService;
 using eShop.Web.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,10 +11,11 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
-
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
 StaticDetails.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
-
+StaticDetails.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
 
 

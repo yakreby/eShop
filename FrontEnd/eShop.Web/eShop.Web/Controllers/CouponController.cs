@@ -1,5 +1,5 @@
 ﻿using eShop.Web.Models;
-using eShop.Web.Service;
+using eShop.Web.Service.IService;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 

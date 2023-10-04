@@ -1,0 +1,38 @@
+﻿@model RegistrationRequestDto
+@{
+    ViewData["Title"] = "Register";
+}
+<h1 class="text-center">Register</h1>
+<form asp-controller="Auth" asp-action="Register" method="post">
+    <div class="row text-center">
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+    <div class="form-group">
+        <label for="EmailAddress">Email Address</label>
+        <input asp-for="EmailAddress" class="form-control" type="text" placeholder="Email Address" />
+    </div>
+    <div class="form-group">
+        <label for="EmailAddress">Phone Number</label>
+        <input asp-for="PhoneNumber" class="form-control" type="text" placeholder="Email Address" />
+    </div>
+    <div class="form-group">
+        <label for="EmailAddress">City</label>
+        <input asp-for="City" class="form-control" type="text" placeholder="Email Address" />
+    </div>
+    <div class="form-group">
+        <label for="EmailAddress">Name</label>
+        <input asp-for="Name" class="form-control" type="text" placeholder="Email Address" />
+    </div>
+    <select asp-for="Role" class="form-select" asp-items="@ViewBag.RoleList">
+        <option selected disabled>Select Role</option>
+    </select>
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+    </div><br/>
+    <div class="form-group">
+        <input class="btn btn-sm btn-outline-dark" asp-for="EmailAddress" class="form-control" type="submit" value="Register" />
+    </div>
+</form>
+
+

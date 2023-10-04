@@ -1,8 +1,8 @@
 ﻿using eShop.Web.Models;
+using eShop.Web.Service.IService;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
-using System.Text.Json.Serialization;
 using static eShop.Web.Utility.StaticDetails;
 
 namespace eShop.Web.Service

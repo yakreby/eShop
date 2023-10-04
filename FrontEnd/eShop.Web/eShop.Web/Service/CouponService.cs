@@ -1,4 +1,5 @@
 ﻿using eShop.Web.Models;
+using eShop.Web.Service.IService;
 using eShop.Web.Utility;
 
 namespace eShop.Web.Service
