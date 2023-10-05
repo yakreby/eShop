@@ -1,4 +1,4 @@
-﻿namespace eShop.Web.Models
+﻿namespace eShop.Services.ShoppingCartAPI.Models.Dto
 {
     public class CouponDto
     {

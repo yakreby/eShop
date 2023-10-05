@@ -1,4 +1,4 @@
-﻿using eShop.Web.Models;
+﻿using eShop.Web.Models.Dto;
 using eShop.Web.Service.IService;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

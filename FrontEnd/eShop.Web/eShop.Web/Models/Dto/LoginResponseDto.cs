@@ -1,4 +1,4 @@
-﻿namespace eShop.Web.Models
+﻿namespace eShop.Web.Models.Dto
 {
     public class LoginResponseDto
     {

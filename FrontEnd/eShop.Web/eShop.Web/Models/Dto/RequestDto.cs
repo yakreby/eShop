@@ -1,6 +1,6 @@
 ﻿using static eShop.Web.Utility.StaticDetails;
 
-namespace eShop.Web.Models
+namespace eShop.Web.Models.Dto
 {
     public class RequestDto
     {
