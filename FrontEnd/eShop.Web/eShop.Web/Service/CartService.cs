@@ -26,7 +26,7 @@ namespace eShop.Web.Service
         {
             return await _baseService.SendAsync(new RequestDto()
             {
-                ApiType = StaticDetails.ApiType.POST,
+                ApiType = StaticDetails.ApiType.GET,
                 Url = StaticDetails.ShoppingCartAPIBase + "/api/cart/GetCart/" + userId
             });
         }
@@ -35,7 +35,7 @@ namespace eShop.Web.Service
         {
             return await _baseService.SendAsync(new RequestDto()
             {
-                ApiType = StaticDetails.ApiType.POST,
+                ApiType = StaticDetails.ApiType.DELETE,
                 Data = cartDetailsId,
                 Url = StaticDetails.ShoppingCartAPIBase + "/api/cart/RemoveCart"
             });

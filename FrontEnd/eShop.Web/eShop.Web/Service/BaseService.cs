@@ -69,7 +69,7 @@ namespace eShop.Web.Service
                     case HttpStatusCode.Unauthorized:
                         return new() { IsSuccess = false, Message = "Unauthorized" };
                     case HttpStatusCode.InternalServerError:
-                        return new() { IsSuccess = false, Message = "Interal Server Error" };
+                        return new() { IsSuccess = false, Message = "Internal Server Error" };
                     default:
                         var apiContent = await apiResponse.Content.ReadAsStringAsync();
                         var apiResponseDto = JsonConvert.DeserializeObject<ResponseDto>(apiContent);

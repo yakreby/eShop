@@ -38,7 +38,7 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
                     CartHeader = _mapper.Map<CartHeaderDto>(_context.CartHeaders.First(
                         x => x.UserId == userId))
                 };
-                cart.CartDetails = _mapper.Map<IEnumerable<CartDetailsDto>>(_context.CartDetails.First(
+                cart.CartDetails = _mapper.Map<IEnumerable<CartDetailsDto>>(_context.CartDetails.Where(
                     x => x.CartHeaderId == cart.CartHeader.CartHeaderId));
 
                 IEnumerable<ProductDto> productDtos = await _productService.GetProductsAsync();
@@ -74,7 +74,7 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
             try
             {
                 var cartFromDb = await _context.CartHeaders.FirstAsync(x => x.UserId == cart.CartHeader.UserId);
-                cartFromDb.CouponCode = "";
+                cartFromDb.CouponCode = cart.CartHeader.CouponCode;
                 _context.CartHeaders.Update(cartFromDb);
                 await _context.SaveChangesAsync();
                 _response.Result = true;

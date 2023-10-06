@@ -22,6 +22,53 @@ namespace eShop.Web.Controllers
             return View(await LoadCartDtoBasedOnLoggedInUser());
         }
 
+        [Authorize]
+        public async Task<IActionResult> Remove(int cartDetailsId)
+        {
+            var userId = User.Claims.Where(x => x.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
+            ResponseDto? response = await _cartService.RemoveFromCartAsync(cartDetailsId);
+
+            if (response != null && response.IsSuccess)
+            {
+                TempData["Success"] = "Cart Updated Successfully";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+        //ApplyCoupon
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ApplyCoupon(CartDto cartDto)
+        {
+            if(cartDto.CartHeader.CouponCode == null)
+            {
+                return RedirectToAction(nameof(CartIndex));   
+            }
+            ResponseDto? response = await _cartService.ApplyCouponAsync(cartDto);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["Success"] = "Coupon Applied Successfully";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+        //RemoveCoupon
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        {
+            cartDto.CartHeader.CouponCode = "";
+            ResponseDto? response = await _cartService.ApplyCouponAsync(cartDto);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["Success"] = "Coupon Applied Successfully";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
         private async Task<CartDto> LoadCartDtoBasedOnLoggedInUser()
         {
             var userId = User.Claims.Where(x => x.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;

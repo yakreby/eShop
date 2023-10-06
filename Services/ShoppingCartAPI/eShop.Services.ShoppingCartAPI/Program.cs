@@ -4,6 +4,7 @@ using eShop.Services.ShoppingCartAPI.Extensions;
 using eShop.Services.ShoppingCartAPI.Service;
 using eShop.Services.ShoppingCartAPI.Service.IService;
 using eShop.Services.ShoppingCartAPI.Settings;
+using eShop.Services.ShoppingCartAPI.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -13,6 +14,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<BackEndApiAuthenticationHttpClientHandler>();
+
+//Auto mapper
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Http Client
+builder.Services.AddHttpClient("Product", x => x.BaseAddress =
+    new Uri(builder.Configuration["ServiceUrls:ProductAPI"]
+)).AddHttpMessageHandler<BackEndApiAuthenticationHttpClientHandler>();
+builder.Services.AddHttpClient("Coupon", x => x.BaseAddress =
+    new Uri(builder.Configuration["ServiceUrls:CouponAPI"]
+)).AddHttpMessageHandler<BackEndApiAuthenticationHttpClientHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
@@ -62,20 +80,7 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-//Auto mapper
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-//Http Client
-builder.Services.AddHttpClient("Product", x => x.BaseAddress =
-    new Uri(builder.Configuration["ServiceUrls:ProductAPI"]
-));
-builder.Services.AddHttpClient("Coupon", x => x.BaseAddress =
-    new Uri(builder.Configuration["ServiceUrls:CouponAPI"]
-));
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICouponService, CouponService>();
 
 //DbContext Configurations
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -86,8 +91,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //Authorization Settings
 builder.AddAppAuthentication();
 builder.Services.AddAuthorization();
-
-
 
 var app = builder.Build();
 

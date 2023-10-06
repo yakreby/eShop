@@ -1,5 +1,6 @@
 using eShop.Services.AuthAPI.Data;
 using eShop.Services.AuthAPI.Models;
+using eShop.Services.AuthAPI.RabbitMQSender;
 using eShop.Services.AuthAPI.Service;
 using eShop.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IRabbitMQAuthMessageSender, RabbitMQAuthMessageSender>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 //Jwt Configuration

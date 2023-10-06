@@ -1,5 +1,6 @@
 ﻿
 using eShop.Services.AuthAPI.Models.Dto;
+using eShop.Services.AuthAPI.RabbitMQSender;
 using eShop.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.Http;
@@ -12,17 +13,21 @@ namespace eShop.Services.AuthAPI.Controllers
     public class AuthAPIController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IRabbitMQAuthMessageSender _rabbitMQAuthMessageSender;
+        private readonly IConfiguration _configuration;
         protected ResponseDto _response;
 
-        public AuthAPIController(IAuthService authService)
+        public AuthAPIController(IAuthService authService, IRabbitMQAuthMessageSender rabbitMQAuthMessageSender, IConfiguration configuration)
         {
             _authService = authService;
+            _configuration = configuration;
             _response = new();
+            _rabbitMQAuthMessageSender = rabbitMQAuthMessageSender;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDto registrationRequestDto)
-        {
+        {   
             var errorMessage = await _authService.Register(registrationRequestDto);
             if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -30,6 +35,8 @@ namespace eShop.Services.AuthAPI.Controllers
                 _response.Message = errorMessage;
                 return BadRequest(_response);
             }
+            _rabbitMQAuthMessageSender.SendMessage(
+                registrationRequestDto.EmailAddress, _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"));
             return Ok(_response);
         }
 

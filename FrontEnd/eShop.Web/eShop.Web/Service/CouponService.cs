@@ -45,6 +45,7 @@ namespace eShop.Web.Service
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = StaticDetails.ApiType.GET,
+                Data = couponCode,
                 Url = StaticDetails.CouponAPIBase + $"/api/coupon/GetByCode/{couponCode}"
             });
         }
