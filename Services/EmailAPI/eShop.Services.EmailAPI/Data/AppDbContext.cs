@@ -10,10 +10,5 @@ namespace eShop.Services.EmailAPI.Data
         }
 
         public DbSet<EmailLogger> EmailLoggers { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

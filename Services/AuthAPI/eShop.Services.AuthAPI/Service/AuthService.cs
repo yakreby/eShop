@@ -3,7 +3,6 @@ using eShop.Services.AuthAPI.Models;
 using eShop.Services.AuthAPI.Models.Dto;
 using eShop.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.Services.AuthAPI.Service
 {
@@ -13,7 +12,7 @@ namespace eShop.Services.AuthAPI.Service
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        public AuthService(AppDbContext appDbContext ,UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
+        public AuthService(AppDbContext appDbContext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
             IJwtTokenGenerator jwtTokenGenerator)
         {
             _appDbContext = appDbContext;
@@ -44,7 +43,7 @@ namespace eShop.Services.AuthAPI.Service
             bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
             if (user == null || isValid == false)
             {
-                return new LoginResponseDto() { User = null, Token = ""};
+                return new LoginResponseDto() { User = null, Token = "" };
             }
             //if user was found, Generate JWT token
             var roles = await _userManager.GetRolesAsync(user);

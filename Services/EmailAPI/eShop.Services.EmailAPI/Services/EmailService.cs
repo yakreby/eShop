@@ -1,12 +1,12 @@
-﻿using System.Text;
-using Microsoft.EntityFrameworkCore;
-using eShop.Services.EmailAPI.Data;
+﻿using eShop.Services.EmailAPI.Data;
 using eShop.Services.EmailAPI.Models;
 using eShop.Services.EmailAPI.Models.Dto;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace eShop.Services.EmailAPI.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private DbContextOptions<AppDbContext> _dbOptions;
 
@@ -37,13 +37,13 @@ namespace eShop.Services.EmailAPI.Services
         public async Task LogOrderPlaced(RewardsMessage rewardsDto)
         {
             string message = "New Order Placed. <br/> Order ID : " + rewardsDto.OrderId;
-            await LogAndEmail(message, "dotnetmastery@gmail.com");
+            await LogAndEmail(message, "x@gmail.com");
         }
 
         public async Task RegisterUserEmailAndLog(string email)
         {
             string message = "User Registeration Successful. <br/> Email : " + email;
-            await LogAndEmail(message, "dotnetmastery@gmail.com");
+            await LogAndEmail(message, "x@gmail.com");
         }
 
         private async Task<bool> LogAndEmail(string message, string email)

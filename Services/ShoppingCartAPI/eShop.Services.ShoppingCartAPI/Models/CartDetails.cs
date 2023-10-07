@@ -14,6 +14,6 @@ namespace eShop.Services.ShoppingCartAPI.Models
         public int ProductId { get; set; }
         [NotMapped]
         public ProductDto Product { get; set; }
-        public int Count { get; set; }  
+        public int Count { get; set; }
     }
 }

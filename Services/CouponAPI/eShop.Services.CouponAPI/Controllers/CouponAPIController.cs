@@ -77,7 +77,7 @@ namespace eShop.Services.CouponAPI.Controllers
             {
                 Coupon coupon = _context.Coupons.FirstOrDefault(x => x.CouponCode.ToLower() == code.ToLower());
                 _response.Result = _mapper.Map<CouponDto>(coupon);
-                if(coupon == null)
+                if (coupon == null)
                 {
                     _response.IsSuccess = false;
                 }
@@ -99,7 +99,7 @@ namespace eShop.Services.CouponAPI.Controllers
                 Coupon coupon = _mapper.Map<Coupon>(couponDto);
                 _context.Coupons.Add(coupon);
                 _context.SaveChanges();
-                
+
                 if (coupon == null)
                 {
                     _response.IsSuccess = false;

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace eShop.Web.Controllers
 {
@@ -73,7 +72,7 @@ namespace eShop.Web.Controllers
                 Count = productDto.Count,
                 ProductId = productDto.ProductId
             };
-            List<CartDetailsDto> cartDetailsDtos = new () { cartDetails};
+            List<CartDetailsDto> cartDetailsDtos = new() { cartDetails };
             cartDto.CartDetails = cartDetailsDtos;
 
 

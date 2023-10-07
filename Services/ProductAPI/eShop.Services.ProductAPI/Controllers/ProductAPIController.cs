@@ -1,4 +1,4 @@
-﻿    using AutoMapper;
+﻿using AutoMapper;
 using eShop.Services.ProductAPI.Data;
 using eShop.Services.ProductAPI.Models;
 using eShop.Services.ProductAPI.Models.Dto;

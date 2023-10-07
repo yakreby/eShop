@@ -9,5 +9,6 @@ namespace eShop.Web.Service.IService
         Task<ResponseDto>? UpsertCartAsync(CartDto cart);
         Task<ResponseDto>? RemoveFromCartAsync(int cartDetailsId);
         Task<ResponseDto>? ApplyCouponAsync(CartDto cartDto);
+        Task<ResponseDto?> EmailCart(CartDto cart);
     }
 }

@@ -9,10 +9,10 @@ namespace eShop.Services.EmailAPI.Messaging
     public class RabbitMQAuthConsumer : BackgroundService
     {
         private readonly IConfiguration _configuration;
-        private readonly IEmailService _emailService;
+        private readonly EmailService _emailService;
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        public RabbitMQAuthConsumer(IConfiguration configuration, IEmailService emailService)
+        public RabbitMQAuthConsumer(IConfiguration configuration, EmailService emailService)
         {
             _configuration = configuration;
             _emailService = emailService;
@@ -24,6 +24,7 @@ namespace eShop.Services.EmailAPI.Messaging
             };
             _connection = factory.CreateConnection();
             ;
+            _channel = _connection.CreateModel();
             _channel.QueueDeclare(_configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"), false, false, false, null);
         }
 
@@ -43,7 +44,7 @@ namespace eShop.Services.EmailAPI.Messaging
             _channel.BasicConsume(_configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"), false, consumer);
             return Task.CompletedTask;
         }
-        
+
         private async Task HandleMessage(string email)
         {
             _emailService.RegisterUserEmailAndLog(email).GetAwaiter().GetResult();

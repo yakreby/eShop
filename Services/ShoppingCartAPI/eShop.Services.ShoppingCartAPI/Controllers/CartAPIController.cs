@@ -2,11 +2,10 @@
 using eShop.Services.ShoppingCartAPI.Data;
 using eShop.Services.ShoppingCartAPI.Models;
 using eShop.Services.ShoppingCartAPI.Models.Dto;
+using eShop.Services.ShoppingCartAPI.RabbitMQSender;
 using eShop.Services.ShoppingCartAPI.Service.IService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.PortableExecutable;
 
 namespace eShop.Services.ShoppingCartAPI.Controllers
 {
@@ -17,15 +16,20 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
         private readonly AppDbContext _context;
         private ResponseDto _response;
         private IMapper _mapper;
+        private IConfiguration _configuration;
         private readonly IProductService _productService;
         private readonly ICouponService _couponService;
-        public CartAPIController(AppDbContext context, IMapper mapper, IProductService productService, ICouponService couponService)
+        private readonly IRabbitMQCartMessageSender _rabbitmqCartMessageSender;
+        public CartAPIController(AppDbContext context, IMapper mapper, IProductService productService, ICouponService couponService,
+            IRabbitMQCartMessageSender rabbitMQCartMessageSender, IConfiguration configuration)
         {
             _context = context;
             _response = new ResponseDto();
             _mapper = mapper;
             _productService = productService;
             _couponService = couponService;
+            _rabbitmqCartMessageSender = rabbitMQCartMessageSender;
+            _configuration = configuration;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -49,10 +53,10 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
                     cart.CartHeader.CartTotal += item.Count * item.Product.Price;
                 }
 
-                if(!string.IsNullOrEmpty(cart.CartHeader.CouponCode))
+                if (!string.IsNullOrEmpty(cart.CartHeader.CouponCode))
                 {
                     CouponDto coupon = await _couponService.GetCouponAsync(cart.CartHeader.CouponCode);
-                    if(coupon != null && cart.CartHeader.CartTotal > coupon.MinAmount)
+                    if (coupon != null && cart.CartHeader.CartTotal > coupon.MinAmount)
                     {
                         cart.CartHeader.CartTotal -= coupon.DiscountAmount;
                         cart.CartHeader.Discount = coupon.DiscountAmount;
@@ -182,6 +186,22 @@ namespace eShop.Services.ShoppingCartAPI.Controllers
                 _response.Message = ex.Message.ToString();
                 _response.IsSuccess = false;
                 return _response;
+            }
+            return _response;
+        }
+
+        [HttpPost("EmailCartRequest")]
+        public async Task<object> EmailCartRequest([FromBody] CartDto cartDto)
+        {
+            try
+            {
+                _rabbitmqCartMessageSender.SendMessage(cartDto, _configuration.GetValue<string>("TopicAndQueueNames:EmailShoppingCartQueue"));
+                _response.Result = true;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.ToString();
             }
             return _response;
         }

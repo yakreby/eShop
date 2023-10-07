@@ -22,9 +22,9 @@ namespace eShop.Web.Service
             HttpClient httpClient = _httpClientFactory.CreateClient("eShop");
             HttpRequestMessage requestMessage = new();
             requestMessage.Headers.Add("Accept", "application/json");
-            
+
             //Token
-            if(withBearer)
+            if (withBearer)
             {
                 var token = _tokenProvider.GetToken();
                 requestMessage.Headers.Add("Authorization", $"Bearer {token}");

@@ -2,8 +2,6 @@
 using eShop.Services.AuthAPI.Models.Dto;
 using eShop.Services.AuthAPI.RabbitMQSender;
 using eShop.Services.AuthAPI.Service.IService;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.Services.AuthAPI.Controllers
@@ -27,7 +25,7 @@ namespace eShop.Services.AuthAPI.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDto registrationRequestDto)
-        {   
+        {
             var errorMessage = await _authService.Register(registrationRequestDto);
             if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -44,7 +42,7 @@ namespace eShop.Services.AuthAPI.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequestDto)
         {
             var loginResponse = await _authService.Login(loginRequestDto);
-            if(loginResponse.User == null)
+            if (loginResponse.User == null)
             {
                 _response.IsSuccess = false;
                 _response.Message = "Username or password is incorrect";

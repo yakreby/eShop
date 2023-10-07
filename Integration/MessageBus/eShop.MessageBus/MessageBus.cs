@@ -1,6 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
-using System.Text;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace eShop.MessageBus
 {

@@ -6,4 +6,3 @@
         public IEnumerable<CartDetailsDto>? CartDetails { get; set; }
     }
 }
- 

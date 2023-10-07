@@ -27,7 +27,7 @@ namespace eShop.Web.Service
 
         public void SetToken(string token)
         {
-            _contextAccessor.HttpContext.Response.Cookies.Append(StaticDetails.TokenCookie,token);
+            _contextAccessor.HttpContext.Response.Cookies.Append(StaticDetails.TokenCookie, token);
         }
     }
 }

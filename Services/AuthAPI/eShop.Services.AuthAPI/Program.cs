@@ -3,7 +3,6 @@ using eShop.Services.AuthAPI.Models;
 using eShop.Services.AuthAPI.RabbitMQSender;
 using eShop.Services.AuthAPI.Service;
 using eShop.Services.AuthAPI.Service.IService;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

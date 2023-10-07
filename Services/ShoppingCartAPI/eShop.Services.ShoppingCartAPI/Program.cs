@@ -1,6 +1,7 @@
 using AutoMapper;
 using eShop.Services.ShoppingCartAPI.Data;
 using eShop.Services.ShoppingCartAPI.Extensions;
+using eShop.Services.ShoppingCartAPI.RabbitMQSender;
 using eShop.Services.ShoppingCartAPI.Service;
 using eShop.Services.ShoppingCartAPI.Service.IService;
 using eShop.Services.ShoppingCartAPI.Settings;
@@ -18,7 +19,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<BackEndApiAuthenticationHttpClientHandler>();
-
+builder.Services.AddScoped<IRabbitMQCartMessageSender, RabbitMQCartMessageSender>();
 //Auto mapper
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using NuGet.Packaging.Signing;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
